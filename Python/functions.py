@@ -107,3 +107,31 @@ def parcoursEnLargeur(G, s):
             #marquer s
             marque[s]=1
             print(s)
+
+            
+            
+ def existeVoisinNonVisite(G, marque, s):
+    ilist = successeur(G, s)
+    for item in ilist:
+        if marque[item] == 0:
+            return item
+    return -1
+
+
+def parcoursEnProfondeur(G, s):
+    #enfiler les successeur de s
+    mypile = []
+    marque = [0] * len(G)
+    mypile.extend(successeur(G, s))
+    #marquer s
+    marque[s] = 1
+    print(s)
+    while len(mypile):
+        s = existeVoisinNonVisite(G, marque, s)
+        marque[s] = 1
+        if s != -1:
+            mypile.append(s)
+            print(s)
+        else:
+            mypile.remove(mypile[-1])
+        
