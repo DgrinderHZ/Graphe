@@ -91,20 +91,19 @@ def successeur(G, s):
     return ilist
 
 def parcoursEnLargeur(G, s):
-    #enfiler les successeur de s
-    myfile = []
+    myfile = [s]
     marque = [0] * len(G)
-    myfile.extend(successeur(G, s))
-    #marquer s
     marque[s] = 1
-    print(s)
     while len(myfile):
-        s = myfile.pop()
-        if marque[s] == 0:
-            myfile.extend(successeur(G, s))
-            #marquer s
-            marque[s]=1
-            print(s)
+        # defiler
+        s = myfile[0]
+        myfile.remove(myfile[0])
+        #ajouter les successeurs de s dans file
+        for item in successeur(G, s):
+            if marque[item] == 0:
+                myfile.append(item)
+                marque[item] = 1
+        print(s, end=' ')
 
             
             
@@ -124,15 +123,14 @@ def parcoursEnProfondeur(G, r):
     mypile.extend(successeur(G, r))
     #marquer s
     marque[r] = 1
-    print(r)
+    print(r, end=' ')
     while len(mypile):
         r = mypile[-1]
         s = voisinNonVisite(G, marque, r)
         if len(s):
             mypile.append(s[0])
             marque[s[0]] = 1
-            s = []
         else:
-            print(mypile[-1])
+            print(mypile[-1], end=' ')
             mypile.remove(mypile[-1])
             

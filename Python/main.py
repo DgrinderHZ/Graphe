@@ -2,7 +2,9 @@ from functions import *
 from dijkstra import *
 
 G = [[0, 1,0,0,1,0], [0,0,1,1,0,0], [0,0,0,1,0,0], [0,0,0,0,0,0], [0,0,0,0,0,1], [0,0,0,0,0,0]]
-#parcoursEnLargeur(G, 0)
+print("Largeur")
+parcoursEnLargeur(G, 0)
+print("\nProfondeur")
 parcoursEnProfondeur(G, 0)
 
 G =[[0,10,5,inf,inf],
