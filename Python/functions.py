@@ -6,21 +6,16 @@ def degreeSommet(G, s):
     """Rerourne le degree de sommet s"""
     res = 0
     if grapheOriente(G):
-        res = sum(G[s])
-        for i in range(len(G)):
+        res = sum(G[s]) # degree+(s)
+        for i in range(len(G)):# degree-(s)
             res += G[i][s]
     else:
-        for i in range(len(G)):
-            if G[i][s]:
-                res += 1
-        for i in range(len(G)):
-            if G[s][i]:
-                res += 1
+        res = sum(G[s]) # degree(s)
     return res
 
 def grapheOriente(G):
     for i in range(len(G)):
-        for j in range(i, len(G)):
+        for j in range(i, len(G)): # tester la symetrie
             if G[i][j] != G[j][i]:
                 return True
     return False
@@ -70,6 +65,9 @@ def fermetureTrans(G):
     return ft
 
 def estChaine(G, s, e):
+    if estIsole(G, s) or estIsole(G, e):
+        return False
+    #Warshall
     FT = fermetureTrans(G)
     if FT[s][e]:
         return True
@@ -89,7 +87,7 @@ def successeur(G, s):
     ilist = []
     for j in range(len(G)):
         if G[s][j]:
-            ilist.append(j);
+            ilist.append(j)
     return ilist
 
 def parcoursEnLargeur(G, s):
@@ -98,7 +96,7 @@ def parcoursEnLargeur(G, s):
     marque = [0] * len(G)
     myfile.extend(successeur(G, s))
     #marquer s
-    marque[s]=1
+    marque[s] = 1
     print(s)
     while len(myfile):
         s = myfile.pop()
@@ -110,28 +108,36 @@ def parcoursEnLargeur(G, s):
 
             
             
- def existeVoisinNonVisite(G, marque, s):
+def voisinNonVisite(G, marque, s):
     ilist = successeur(G, s)
+    ili = []
     for item in ilist:
         if marque[item] == 0:
-            return item
-    return -1
+            ili.append(item)
+    return ili
 
-
-def parcoursEnProfondeur(G, s):
+# update the r
+def parcoursEnProfondeur(G, r):
     #enfiler les successeur de s
     mypile = []
     marque = [0] * len(G)
-    mypile.extend(successeur(G, s))
+    mypile.extend(successeur(G, r))
     #marquer s
-    marque[s] = 1
-    print(s)
+    marque[r] = 1
+    print(r)
     while len(mypile):
-        s = existeVoisinNonVisite(G, marque, s)
-        marque[s] = 1
-        if s != -1:
-            mypile.append(s)
-            print(s)
+        r = mypile[-1]
+        s = voisinNonVisite(G, marque, r)
+        if len(s):
+            mypile.append(s[0])
+            marque[s[0]] = 1
+            s = []
         else:
+            print(mypile[-1])
             mypile.remove(mypile[-1])
+            
         
+
+G = [[0, 1,0,0,1,0], [0,0,1,1,0,0], [0,0,0,1,0,0], [0,0,0,0,0,0], [0,0,0,0,0,1], [0,0,0,0,0,0]]
+#parcoursEnLargeur(G, 0)
+parcoursEnProfondeur(G, 0)
