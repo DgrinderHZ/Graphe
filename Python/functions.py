@@ -136,8 +136,3 @@ def parcoursEnProfondeur(G, r):
             print(mypile[-1])
             mypile.remove(mypile[-1])
             
-        
-
-G = [[0, 1,0,0,1,0], [0,0,1,1,0,0], [0,0,0,1,0,0], [0,0,0,0,0,0], [0,0,0,0,0,1], [0,0,0,0,0,0]]
-#parcoursEnLargeur(G, 0)
-parcoursEnProfondeur(G, 0)

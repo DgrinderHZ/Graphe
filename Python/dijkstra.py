@@ -29,18 +29,7 @@ def dijkstra(Glist, s0):
     
     return dist, pere
 
-G =[[0,10,5,inf,inf],
-    [10,0,4,3,inf],
-    [5,4,0,1,inf],
-    [inf,3,1,0,6],
-    [inf,inf,inf,6,0]
-]
 
-dist, pere = dijkstra(G, 0)
-i = 0
-for item, item1 in zip(dist, pere):
-    print("Sommet S(", i, ") : dist ", item, ' pere ', item1)
-    i += 1
 
 
 
