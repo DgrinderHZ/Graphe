@@ -4,6 +4,7 @@ import math
 inf = math.inf
 
 def sommetAvecdistMinimal(dist, sommets):
+    """ retur le sommet avec la distance minimale """
     pos = sommets[0]
     for i in sommets:
         if dist[i] < dist[pos]:
@@ -14,18 +15,17 @@ def dijkstra(Glist, s0):
     n = len(Glist)
     dist = [inf] * n
     pere = [-1 for i in range(n)] #le prédecesseur de chaque sommet initialisé à -1
-    #chemin = []
-    marque = []
-    nonMarquer = [s for s in range(n)]
+    marque = [] # visited
+    nonMarquer = [s for s in range(n)] # not visited
     dist[s0] = 0
     while(len(nonMarquer)):
-        sdm = sommetAvecdistMinimal(dist, nonMarquer)
-        marque.append(sdm)
-        nonMarquer.remove(sdm)
+        sadm = sommetAvecdistMinimal(dist, nonMarquer)
+        marque.append(sadm)
+        nonMarquer.remove(sadm)
         for item in nonMarquer:
-            if dist[sdm] + Glist[sdm][item] < dist[item]:
-                dist[item] = dist[sdm] + Glist[sdm][item]
-                pere[item] = sdm
+            if dist[sadm] + Glist[sadm][item] < dist[item]:
+                dist[item] = dist[sadm] + Glist[sadm][item]
+                pere[item] = sadm
     
     return dist, pere
 

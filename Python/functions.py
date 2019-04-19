@@ -118,12 +118,10 @@ def voisinNonVisite(G, marque, s):
 # update the r
 def parcoursEnProfondeur(G, r):
     #enfiler les successeur de s
-    mypile = []
+    mypile = [r]
     marque = [0] * len(G)
-    mypile.extend(successeur(G, r))
     #marquer s
     marque[r] = 1
-    print(r, end=' ')
     while len(mypile):
         r = mypile[-1]
         s = voisinNonVisite(G, marque, r)
